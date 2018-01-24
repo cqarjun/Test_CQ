@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.conformiq.creator.structure.dsl="http://www.conformiq.com/emf/14/StructureDiagram" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_YxrCIADsEeiAcb_NP339Yg" type="Dsl" name="Structure%20Diagram2.sd" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_ZgGOYADsEeiAcb_NP339Yg" type="2003">
+    <children xmi:type="notation:DecorationNode" xmi:id="_ZgG1cADsEeiAcb_NP339Yg" type="5037"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_ZgG1cQDsEeiAcb_NP339Yg" type="7003">
+      <children xmi:type="notation:Node" xmi:id="_aLAMkADsEeiAcb_NP339Yg" type="3014">
+        <children xmi:type="notation:DecorationNode" xmi:id="_aLAMlQDsEeiAcb_NP339Yg" type="5016"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_aLAMkQDsEeiAcb_NP339Yg"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_aLAMkgDsEeiAcb_NP339Yg" fontName="Segoe UI"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_aLAMkwDsEeiAcb_NP339Yg"/>
+        <element xmi:type="com.conformiq.creator.structure.dsl:Button" href="Structure%20Diagram2.sl#qmla61fd4cee6bc43818d382fc6e9e5ff15"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aLAMlADsEeiAcb_NP339Yg" x="89" y="67"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_ZgGOYQDsEeiAcb_NP339Yg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_ZgGOYgDsEeiAcb_NP339Yg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_ZgGOYwDsEeiAcb_NP339Yg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_ZgGOZADsEeiAcb_NP339Yg"/>
+    <element xmi:type="com.conformiq.creator.structure.dsl:Screen" href="Structure%20Diagram2.sl#qmlb42a5b531ae645dc8bda5b1017bd79cd"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZgGOZQDsEeiAcb_NP339Yg" x="70" y="80" width="246" height="231"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_YxrCIQDsEeiAcb_NP339Yg"/>
+  <element xmi:type="com.conformiq.creator.structure.dsl:Model" href="Structure%20Diagram2.sl#/"/>
+</notation:Diagram>
