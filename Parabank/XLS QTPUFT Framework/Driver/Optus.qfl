@@ -1,0 +1,84 @@
+'Optus Functions to be added to the Settings of the Global Test
+
+Public Function  Select_Row_Listbox(DialogBox,paramValue)
+ newPath = "JavaWindow(""Pegasus"").JavaDialog(""Service Order Details"").JavaDialog(""Create Service Instance"").JavaDialog(""Work Order Details"").JavaDialog(""Provide Billing Products"").JavaTree("""&DialogBox&""")"
+ pval = """"&paramValue&""""
+ Execute(newPath & ".Select "& pval)
+End Function
+
+
+Public Function  Select_Item_From_Listbox(jPath,paramValue)
+                Dim list_value,first_value
+                Execute("Set oPath =" & jPath)
+                listV = oPath.GetROProperty("items count")
+                list_value= oPath.GetItemIndex (paramValue)    
+                                first_value =  oPath.GetItem ("#0")
+                                first_value = left(first_value,1)
+                                If first_value = "-"  Then
+                                                list_value =list_value +1
+                                                oPath.Select "-"                               
+                                                Set WshShell = CreateObject("WScript.Shell")
+                                                For i=1 to list_value
+                                                WshShell.SendKeys "{Down}"
+                                                Next
+                                                WshShell.SendKeys "{Enter}"
+
+
+                       Exit Function
+                                Else
+                                                oPath.Select paramValue
+                                End If
+                                Set oPath = Nothing
+                                Set WshShell = Nothing                                                                                 
+End Function
+
+
+Public Function Select_Row_From_Table(DialogBox,TableName,RowNum)
+			Set newPath1= JavaWindow("Pegasus").JavaDialog("Account Details - Create").JavaDialog("Search - Address").JavaTable("State")
+			Set newPath2= JavaWindow("Pegasus").JavaDialog("Service Order Details").JavaDialog("Create Service Instance").JavaDialog("Work Order Details").JavaTable("GenericTable")
+			Set newPath3= JavaDialog("Network Product Parameter").JavaDialog("Service Number Listing").JavaTable("JTable")
+
+			If newPath1.Exist Then
+				newPath =  "JavaWindow(""Pegasus"").JavaDialog(""Account Details - Create"").JavaDialog("""&DialogBox&""").JavaTable("""&TableName&""")"
+			End If
+
+			If newPath2.Exist Then
+				newPath =  "JavaWindow(""Pegasus"").JavaDialog(""Service Order Details"").JavaDialog(""Create Service Instance"").JavaDialog("""&DialogBox&""").JavaTable("""&TableName&""")"
+			End If
+
+			If newPath3.Exist Then
+				newPath =  	newPath = "JavaDialog(""Network Product Parameter"").JavaDialog("""&DialogBox&""").JavaTable("""&TableName&""")"
+        	End If
+
+			Execute("Set oPath =" & newPath)
+
+                On error resume next
+                Dim row_count
+                row_count = oPath.GetROProperty ("rows")
+				msgbox row_count
+                If row_count >0  Then
+                                                oPath.SelectRow RowNum                         
+                                                If err.number<>0 Then
+                                                                oPath.SelectRow 0
+                                                End If
+                                Reporter.ReportEvent micDone,"Select_Row_From_Table","row is selected from the table"
+                                Else
+                                Reporter.ReportEvent  micFail,"Select_Row_From_Table","row is not available in the table, Change search criteria"
+                End If
+                Set oPath = Nothing
+
+ End Function
+
+Public Function Select_From_Menu(Menu)
+	menuVal = Menu
+   Window("OPOM Single Sign On").Activate
+   jpage = "Window(""OPOM Single Sign On"").WinMenu(""Menu"").Select  "
+   Execute(jpage & menuVal)
+   Wait 10
+   Reporter.ReportEvent  micPass,"Select_From_Menu","Navigate to ->" & menuVal   
+End Function
+
+Public function Logout_OPOM()
+   Window("OPOM Single Sign On").WinObject("ThunderRT6Frame").Click
+Window("OPOM Single Sign On").Dialog("Exit").WinButton("OK").Click
+End Function

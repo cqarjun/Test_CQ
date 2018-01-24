@@ -1,0 +1,126 @@
+'###################################################################
+' Objective            :     This is a driver script for Sample Keyword Driven Framework
+'###################################################################
+
+ 
+Public Function GlobalDriver()
+ 
+relativePath = ""'Fill the path of the "XLS QTPUFT Framework" folder location
+'ex: relativePath = "D:\XLS QTPUFT Framework"
+testSuitePath = relativePath&"\ExcelTestData\TestSuite.xls" 'Fill TestCaseName Excel Path
+testCasesPath =relativePath &"\ExcelTestData\TestCases.xls" 'Fill TestData Excel Path
+harnessPath = relativePath&"\ExcelTestData\TestHarness.xls" 'Fill TestHarness Excel Path
+
+ 
+Set myTestSuite = createobject("Excel.Application")
+myTestSuite.Visible = false
+ 
+Set myHarness = createobject("Excel.Application")
+myHarness.Visible = false
+ 
+Set myTest = createobject("Excel.Application")
+myTest.Visible = false
+ 
+ 
+Set TestSuiteBook = myTest.Workbooks.Open(testSuitePath)
+Set TestcaseBook= myTestSuite.Workbooks.Open(testCasesPath)
+Set HarnessBook= myTestSuite.Workbooks.Open(harnessPath)
+ 
+Set tSheet = TestSuiteBook.Worksheets("TestCases")
+trowcount = tSheet.UsedRange.Rows.Count
+tcolcount = tSheet.UsedRange.Columns.Count
+ 
+TestcaseNumber= TestcaseBook.Worksheets.count
+Set  myHarnesssheet=HarnessBook.Worksheets("Harness")
+Set  myORMappingsheet=HarnessBook.Worksheets("ORMapping")	
+			   
+Row_Count_Harness = myHarnesssheet.UsedRange.Rows.Count
+Column_Count_Harness = myHarnesssheet.UsedRange.Columns.Count
+			   
+Row_Count_ORMapping = myORMappingsheet.UsedRange.Rows.Count
+Column_Count_ORMapping = myORMappingsheet.UsedRange.Columns.Count
+
+For  trow = 2 to trowcount
+    If   tSheet.cells(trow,3).value = "Y"Then   
+    tName = tSheet.cells(trow,2).value
+        Set  TestSheet=TestcaseBook.Worksheets( tName)
+        rowcount = TestSheet.UsedRange.Rows.Count
+        colcount = TestSheet.UsedRange.Columns.Count
+    	customActionName=""
+		customActionNameFound = False
+        For tcrow = 2 to rowcount
+            fnName = TestSheet.cells(tcrow,2).value
+            tparamName =  TestSheet.cells(tcrow,4).value
+			paramValue = TestSheet.cells(tcrow, 5).value
+			If TestSheet.cells(tcrow,3).value = "Y" then 
+				For harneessRow=2 to Row_Count_Harness				   
+					actionName = myHarnesssheet.cells(harneessRow,5).value
+					If myHarnesssheet.cells(harneessRow,2).value = fnName  and myHarnesssheet.cells(harneessRow,6).value = tparamName Then										
+						If  myHarnesssheet.cells(harneessRow,3).value = "Y" Then																								   
+							objName = myHarnesssheet.cells(harneessRow,4)					
+							customActionNameFound = False
+							If  myHarnesssheet.cells(harneessRow,7).value = "Y" Then    	
+								    customActionNameFound = True
+							        customActionName = customActionName&actionName
+									customActionName = Replace(customActionName,tparamName, paramValue)               						
+							End If
+							If  customActionNameFound =  False and customActionName <> "" Then	
+								    Execute customActionName&""
+									customActionName =""
+							End If
+							If customActionName ="" Then				
+								If  actionName = ".Click"  or actionName = ".javaSelect" or actionName = "Call Select_From_Menu()"  Then
+									For orMapRow=2 to Row_Count_ORMapping
+										If  myORMappingsheet.cells(orMapRow,2).value = objName Then
+											objValue = myORMappingsheet.cells(orMapRow,4).value
+											objName = myORMappingsheet.cells(orMapRow,3).value										
+												 If actionName = ".Click" Then
+													execstr  = objValue& ".Click"
+												   Execute execstr
+												  else 
+													If  myORMappingsheet.cells(orMapRow,3).value = "Date of Birth"  or myORMappingsheet.cells(orMapRow,3).value = "Applied Date"  or myORMappingsheet.cells(orMapRow,3).value = "Received Date" Then
+																execstr  = objValue& ".Select "  & """" &paramValue&""""
+																Execute execstr		
+																Execute execstr															
+														else
+														If  actionName = "Call Select_From_Menu()" Then
+																Call Select_From_Menu(paramValue)
+														   else
+																Call Select_Item_From_Listbox(objValue,paramValue)
+														End If
+														
+													   End If												 
+													 End If
+											  End If
+									Next
+								else
+									If  myHarnesssheet.cells(harneessRow,6).value = TestSheet.cells(tcrow, 4).value Then
+										For orMapRow=2 to Row_Count_ORMapping
+												If  myORMappingsheet.cells(orMapRow,2).value = objName Then
+													  objValue = myORMappingsheet.cells(orMapRow,4).value					
+														If myHarnesssheet.cells(harneessRow,5).value = "OpenIE" Then
+															execstr  = objValue& paramValue
+														else
+															actionValue = myHarnesssheet.cells(harneessRow,5).value
+															execstr  = objValue &actionValue&" "& paramValue
+														End If
+													Execute execstr
+												End If												   
+										Next
+									End If
+							   End If
+						   End If
+						End If
+					End If
+				Next
+        End if
+        Next
+    'Next
+    End If
+Next
+myTestSuite.Close
+myHarness.Close
+myTest.close
+ 
+End Function
+

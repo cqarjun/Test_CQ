@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.conformiq:RequirementRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.conformiq="http://www.conformiq.com/EMF/2/Requirements" lastUpdate="1488379140179">
+  <requirementGraphRoots identifier="com.conformiq.requirements.rally-https://rally1.rallydev.com-Workspace 1-Project B-root-req" source="//@requirementProviders.0" externalIdentifier="-1">
+    <name value="Rally Requirements(Project B)"/>
+    <priority/>
+    <subrequirements identifier="com.conformiq.requirements.rally-https://rally1.rallydev.com-Workspace 1-Project B-US12-req" source="//@requirementProviders.0" externalIdentifier="US12">
+      <name value="invalid login"/>
+      <priority/>
+    </subrequirements>
+    <subrequirements identifier="com.conformiq.requirements.rally-https://rally1.rallydev.com-Workspace 1-Project B-US13-req" source="//@requirementProviders.0" externalIdentifier="US13">
+      <name value="forgot password"/>
+      <priority/>
+    </subrequirements>
+    <subrequirements identifier="com.conformiq.requirements.rally-https://rally1.rallydev.com-Workspace 1-Project B-US213-req" source="//@requirementProviders.0" externalIdentifier="US213">
+      <name value="Export Function for Equipment Type"/>
+      <priority/>
+    </subrequirements>
+  </requirementGraphRoots>
+  <requirementProviders identifier="com.conformiq.requirements.rally" name="Rally Requirements(Project B)">
+    <properties key="&amp;Workspace:" value="Workspace 1"/>
+    <properties key="&amp;Http Proxy Host:"/>
+    <properties key="&amp;User name:" value="rally@conformiq.com"/>
+    <properties key="&amp;Rally Host Name:" value="https://rally1.rallydev.com"/>
+    <properties key="&amp;User  story:" value="\User stories\login"/>
+    <properties key="&amp;Http Proxy Computer Name"/>
+    <properties key="&amp;Http Proxy Port:"/>
+    <properties key="&amp;Http Proxy Domain Name:"/>
+    <properties key="&amp;Connect through proxy" value="false"/>
+    <properties key="&amp;Project:" value="Project B"/>
+    <properties key="&amp;Http Proxy Password:"/>
+    <properties key="&amp;Password:" value="dnsaoiensaps.df"/>
+    <properties key="&amp;Http Proxy Username:"/>
+  </requirementProviders>
+</com.conformiq:RequirementRepository>

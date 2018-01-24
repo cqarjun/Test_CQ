@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.conformiq.creator.structure.dsl="http://www.conformiq.com/emf/14/StructureDiagram" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_PBNew" type="Dsl" name="PBNew.sd" measurementUnit="Pixel">
+  <element xmi:type="com.conformiq.creator.structure.dsl:Model" href="PBNew.sl#/"/>
+</notation:Diagram>
